@@ -1,0 +1,45 @@
+league-stat-tracker/
+├── public/                     # Public assets (served as-is)
+│   ├── index.html              # Main HTML file
+│   └── favicon.ico             # Favicon
+├── src/                        # React app source code
+│   ├── api/                    # API integration logic
+│   │   ├── riotApi.js          # Functions to call the Riot API
+│   │   ├── openaiApi.js        # Functions to call the OpenAI API
+│   │   └── config.js           # API keys and configurations
+│   ├── components/             # Reusable components
+│   │   ├── PlayerSearch.jsx    # Component for player search input
+│   │   ├── PlayerStats.jsx     # Component to display player stats
+│   │   ├── AnalysisResult.jsx  # Component to display OpenAI analysis
+│   │   └── LoadingSpinner.jsx  # Reusable loading spinner component
+│   ├── pages/                  # Pages for routing
+│   │   ├── Home.jsx            # Homepage
+│   │   ├── PlayerProfile.jsx   # Player profile page
+│   │   └── NotFound.jsx        # 404 page
+│   ├── services/               # Services for Riot and OpenAI logic
+│   │   ├── analyzePlayer.js    # Combines Riot and OpenAI logic
+│   │   └── utils.js            # Utility functions (e.g., formatting, error handling)
+│   ├── styles/                 # CSS or SCSS files
+│   │   ├── App.css             # Global styles
+│   │   ├── PlayerStats.css     # Styles specific to PlayerStats
+│   │   └── LoadingSpinner.css  # Styles for loading spinner
+│   ├── App.jsx                 # Root component
+│   ├── index.jsx               # App entry point
+│   └── routes.js               # React Router configuration
+├── server/                     # Backend server for API proxies
+│   ├── server.js               # Express server for backend
+│   ├── routes/                 # Backend routes
+│   │   ├── riot.js             # Route to handle Riot API calls
+│   │   └── openai.js           # Route to handle OpenAI API calls
+│   ├── controllers/            # Logic for routes
+│   │   ├── riotController.js   # Riot API handling logic
+│   │   └── openaiController.js # OpenAI API handling logic
+│   └── .env                    # Backend environment variables
+├── .env                        # Frontend environment variables
+├── .gitignore                  # Files and folders to ignore in Git
+├── package.json                # Frontend dependencies
+└── README.md                   # Project documentation
+
+
+Main repos or tools used: 
+

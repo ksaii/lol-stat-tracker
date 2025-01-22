@@ -1,0 +1,31 @@
+.typewriter {
+    overflow: hidden; /* Hide text outside the container */
+    border-right: 2px solid orange; /* Typewriter cursor */
+    white-space: nowrap; /* Keep the text on a single line */
+    animation: 
+    typing var(--duration) steps(var(--steps))forwards,
+     blink-caret 0.6s step-end infinite;
+    height: fit-content;
+    
+  }
+  
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: orange;
+    }
+  }
+  

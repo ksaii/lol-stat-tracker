@@ -1,0 +1,132 @@
+#root {
+  width: 100vw;
+  height: 90vh;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  
+}
+
+header{
+  position: fixed; /* Makes the header stick to the top */
+  top: 0; /* Aligns the header to the top of the page */
+  
+  width: 100%; /* Full width of the page */
+  background-color: hsl(0, 0%, 4%); /* Dark background color */
+  color: white; /* White text */
+  padding: 100px; /* Padding inside the header */
+  box-shadow: 0 10px 100px rgba(255, 255, 255, 0.1); /* Optional shadow effect */
+  z-index: 1000; /* Ensures it stays above other elements */
+  text-align: center;
+
+}
+
+footer{
+  position: fixed; /* Makes the header stick to the top */
+  bottom: 0; /* Aligns the header to the top of the page */
+  
+  width: 100%; /* Full width of the page */
+  background-color: hsl(0, 0%, 4%); /* Dark background color */
+  color: white; /* White text */
+  padding: 20px; /* Padding inside the header */
+  box-shadow: 0 10px 100px rgba(255, 255, 255, 0.1); /* Optional shadow effect */
+  z-index: 1000; /* Ensures it stays above other elements */
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: white;
+  background-color: rgb(13, 14, 14);
+}
+
+#logo {
+  
+  background-image: url('/src/assets/VladArt.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 15%;
+  background-position: center;
+  filter:blur(0,10px);
+
+  will-change: filter;
+  transition: filter 300ms;
+  visibility: visible;
+  height: 30vh;
+  width: 50vh;
+  padding: 1.5em;
+  overflow: hidden;
+
+  
+}
+
+#logoTitle {
+  font-size: 3.2em;
+  line-height: 1.1;
+ 
+}
+
+
+
+
+#logo:hover {
+  filter: drop-shadow(0 0 2em #EE2E31);
+}
+#logo.react:hover {
+  filter: drop-shadow(0 0 2em #EE2E31);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+
+.typewriter {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .07em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
