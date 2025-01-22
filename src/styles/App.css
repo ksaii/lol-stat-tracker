@@ -16,8 +16,8 @@ header{
   
   width: 100%; /* Full width of the page */
   background-color: hsl(0, 0%, 4%); /* Dark background color */
-  color: white; /* White text */
-  padding: 100px; /* Padding inside the header */
+  color: #ffffff; /* White text */  
+   /* Padding inside the header */
   box-shadow: 0 10px 100px rgba(255, 255, 255, 0.1); /* Optional shadow effect */
   z-index: 1000; /* Ensures it stays above other elements */
   text-align: center;
