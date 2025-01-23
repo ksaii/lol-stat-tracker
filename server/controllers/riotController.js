@@ -1,7 +1,7 @@
 import axios from "axios";
 import { response } from "express";
 
-const RIOT_API_KEY = "RGAPI-dc7254df-50f2-4066-b5e9-b3e911e7bfd2";
+const RIOT_API_KEY = "RGAPI-dc7254df-50f2-4066-b5e9-b3e911e7bfd2 ";
 const NA_RIOT_ROUTE = "https://na1.api.riotgames.com";
 const AMERICAS_RIOT_ROUTE = "https://americas.api.riotgames.com";
 const FETCH_RIOT_UUID = "/riot/account/v1/accounts/by-riot-id/"; /* /riot/account/v1/accounts/by-riot-id/{Name}/{Tag} */
