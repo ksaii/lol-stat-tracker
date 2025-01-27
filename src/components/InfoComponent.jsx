@@ -1,4 +1,7 @@
 import PropTypes from "prop-types";
+import '../styles/PlayerProfile.css';
+
+
 
 const InfoComponent = ({
   width = "40px",
@@ -9,7 +12,11 @@ const InfoComponent = ({
   text2 = "",
   text3 = "",
   text4 = "",
+
 }) => {
+
+
+  
   return (
     <div
       className="info-container"
@@ -20,31 +27,10 @@ const InfoComponent = ({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "15px",
       }}
     >
-      <div style={{ 
-        display: "flex", 
-        flexDirection: "row" ,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "grey",
-        borderRadius: "5px",    
-        padding: "5px", 
-        margin: "5px",
-        width: "100%",  
-        }}>
-        {image1 && (
-          <img
-            src={image1}
-            alt="Icon1"
-            style={{ height: "60px", width: "60px" }}
-          />
-        )}
-        {text1 && <p>{text1}</p>}
-        {text2 && <p>{text2}</p>}
-      </div>
-
-        <div style={{
+         <div className="scale-in-center" style={{
             display: "flex", 
             flexDirection: "row" ,
             justifyContent: "center",
@@ -54,13 +40,65 @@ const InfoComponent = ({
             padding: "5px", 
             margin: "5px",
             width: "100%",
+            height: "100%",
+            overflow: 'auto',
+            textOverflow: 'ellipsis',
+            
+
+        }}>
+        {image1 && (
+          <img
+            src={image1}
+            alt="Icon1"
+            style=
+            {{ 
+              height: "60px",
+               width: "60px",
+               padding: '10px',
+              borderRadius: "50%",}}
+          />
+        )}
+            <div style={{
+          display: "flex",
+           flexDirection: "column",
+            justifyContent: "center",
+             alignItems: "center",
+             padding: "10px",
+             }}>
+        {text1 && <p>{text1}</p>}
+        {text2 && <p>{text2}</p>}
+        </div>
+      </div>
+
+        <div className="scale-in-center" style={{
+            display: "flex", 
+            flexDirection: "row" ,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: 'rgba(0, 0, 0, 1.0)',
+            borderRadius: "5px",    
+            padding: "5px", 
+            margin: "5px",
+            width: "100%",
+            height: "100%",
+            overflow: 'auto',
+            
+            
         }}>
         {image2 && <img 
         src={image2} 
         alt="Icon2" 
-        style={{ height: "60px", width: "60px" }}/>}
+        style={{ height: "60px", width: "60px", padding: '10px',borderRadius: "50%" }}/>}
+        <div style={{
+          display: "flex",
+           flexDirection: "column",
+            justifyContent: "center",
+             alignItems: "center",
+             padding: "10px",
+             }}>
       {text3 && <p>{text3}</p>}
       {text4 && <p>{text4}</p>}
+      </div>
         </div>
       
     </div>
@@ -76,6 +114,8 @@ InfoComponent.propTypes = {
   text2: PropTypes.string,
   text3: PropTypes.string,
   text4: PropTypes.string,
+  delay1: PropTypes.string,
+  delay2: PropTypes.string,
 };
 
 export default InfoComponent;

@@ -2,7 +2,8 @@ import express, { response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import axios from 'axios';
-import apiRoutes from './routes/riot.js';
+import riotRoutes from './routes/riot.js';
+import openaiRoutes from './routes/openai.js';
 
 dotenv.config();
 
@@ -11,31 +12,15 @@ import OpenAI from 'openai';
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/api', apiRoutes)
+app.use('/riot', riotRoutes);
+app.use('/openai', openaiRoutes);
 
 
-// Intialize OpenAI
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY, // Securely load the API key from the .env file
-  });
-  
 
-app.post('/api/generate', async (req, res) => {
-    try {
-        const { prompt } = req.body;
-        const response = await openai.chat.completions.create({
-            model: 'gpt-4o-mini',
-            messages: [
-                { role: 'user', content: prompt },
-            ],
-        });
-        console.log(response.choices[0].message.content);
-        res.json(response.choices[0].message.content); 
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error generating text');
-    }
+// Error Handling Middleware (Optional)
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
 });
 
 

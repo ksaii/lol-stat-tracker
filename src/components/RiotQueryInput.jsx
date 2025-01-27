@@ -44,7 +44,7 @@ const AutoCompleteInput = () => {
 
     try {
       
-        const response = await fetch(`/api/riot/summoner/${encodeURIComponent(summonerName)}`); // Correct endpoint
+        const response = await fetch(`/riot/summoner/${encodeURIComponent(summonerName)}`); // Correct endpoint
         if (!response.ok) throw new Error('Failed to fetch summoner data');
 
         const data = await response.json();
@@ -78,29 +78,32 @@ const AutoCompleteInput = () => {
       localStorage.setItem("storedInputs",JSON.stringify(updatedInputs));
     }
     
-    fetchSummonerData(inputValue); // Trigger search on form submit
-
-    setTimeout(() => {
-    setLoading(false);
+    console.log("Navigating to profile page...");
     navigate(`/profile/${encodeURIComponent(inputValue)}`);
-    console.log("delay 1");
-    }, 4000);
-    console.log("delay 1");
+    
   };
   
 
   const handleSuggestionClick = (suggestion) => {
 
     setInputValue(suggestion);
-    fetchSummonerData(suggestion);
-    setTimeout(() => {
-      navigate(`/profile/${encodeURIComponent(suggestion)}`);
-      console.log("delay 1");
-      }, 500);
-      console.log("delay 1");
+    console.log("Navigating to profile page...");
+    navigate(`/profile/${encodeURIComponent(suggestion)}`);
+    
 
   };
 
+
+
+  const navigateAfterDelay = () => {
+    // Show loading spinner or content
+    document.getElementById('loading-spinner').style.display = 'block';
+  
+    // After delay (preloading), navigate
+    setTimeout(() => {
+      window.location.href = '/newPage';  // or history.push('/newPage') for React
+    }, 1500);  // Delay in milliseconds (1.5 seconds)
+  };
   return (
 
     <div style={{ paddingTop:'80px',padding: '20px', maxWidth: '600px',width:'600px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >

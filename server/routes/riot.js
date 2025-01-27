@@ -1,8 +1,9 @@
 import express from 'express';
-const router = express.Router();
 import getCurrentRank from '../controllers/riotController.js';
 
+const router = express.Router();
 
-router.get('/riot/summoner/:summonerName', getCurrentRank);
+// Riot Route
+router.get('/summoner/:summonerName', getCurrentRank);
 
 export default router;

@@ -1,7 +1,10 @@
 import axios from "axios";
-import { response } from "express";
+import express, { response } from "express";
+import dotenv from 'dotenv';
 
-const RIOT_API_KEY = "RGAPI-dc7254df-50f2-4066-b5e9-b3e911e7bfd2 ";
+dotenv.config();
+
+const RIOT_API_KEY = process.env.RIOT_API_KEY;
 const NA_RIOT_ROUTE = "https://na1.api.riotgames.com";
 const AMERICAS_RIOT_ROUTE = "https://americas.api.riotgames.com";
 const FETCH_RIOT_UUID = "/riot/account/v1/accounts/by-riot-id/"; /* /riot/account/v1/accounts/by-riot-id/{Name}/{Tag} */
@@ -11,6 +14,7 @@ const FETCH_ENTRIES = "/lol/league/v4/entries/by-summoner/"   /* /lol/league/v4/
 const getCurrentRank = async (req, res) => {
   try {
     
+    console.log("key",RIOT_API_KEY);
     const PUUID = await fetchPUUID(req.params.summonerName);
     const SUMMONERDATA = await fetchEID(PUUID); // This fetches encrypted ID
     const ENTRIES = await fetchEntries(SUMMONERDATA.id); // This fetches rank with encrypted ID
