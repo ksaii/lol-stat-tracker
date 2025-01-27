@@ -31,16 +31,17 @@ const PlayerProfile = () => {
 
     
       promptGPT(prompt).then((data) => {
-      setLoading(false);
       if(data.error){
         setError(data.error);
       }else{
         setOpenaiData(data.data);
         console.log("Open ai response:" + openaiData);
+        setLoading(false);
       }
 
       })
-
+   
+      
   }
 
   useEffect(() => {
@@ -48,7 +49,6 @@ const PlayerProfile = () => {
     setLoading(true); // Start loading
     console.log("Fetching data for summonerrrrr: ", summonerName);
     fetchSummonerData(summonerName).then((data) => {
-      setLoading(false);
       if (data.error) {
         setError(data.error);
       } else {
@@ -133,8 +133,7 @@ const PlayerProfile = () => {
             image2={`/src/assets/RankedIcons/Rank=${
               playerData.entries[0]?.tier ?? "Unranked"
             }.png`}
-            animationDelay1="1s"
-            animationDelay2="2s"
+            icon1alt="Profile Icon"
           ></InfoComponent>
 
           <InfoComponent

@@ -12,8 +12,8 @@ import OpenAI from 'openai';
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/riot', riotRoutes);
-app.use('/openai', openaiRoutes);
+app.use('/api/riot', riotRoutes);
+app.use('/api/openai', openaiRoutes);
 
 
 

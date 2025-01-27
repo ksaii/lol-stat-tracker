@@ -3,7 +3,7 @@ const fetchSummonerData = async (summonerName) => {
 
   try {
     const response = await fetch(
-      `http://127.0.0.1:3001/riot/summoner/${encodeURIComponent(summonerName)}`
+      `/api/riot/summoner/${encodeURIComponent(summonerName)}`
     ); // Correct endpoint
     if (!response.ok) throw new Error("Failed to fetch summoner data");
 

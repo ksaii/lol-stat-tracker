@@ -8,6 +8,8 @@ const InfoComponent = ({
   height = "40px",
   image1 = null,
   image2 = null,
+  icon1alt = "icon1",
+    icon2alt = "icon2",
   text1 = "",
   text2 = "",
   text3 = "",
@@ -49,7 +51,7 @@ const InfoComponent = ({
         {image1 && (
           <img
             src={image1}
-            alt="Icon1"
+            alt={icon1alt}
             style=
             {{ 
               height: "60px",
@@ -87,7 +89,7 @@ const InfoComponent = ({
         }}>
         {image2 && <img 
         src={image2} 
-        alt="Icon2" 
+        alt={icon2alt}
         style={{ height: "60px", width: "60px", padding: '10px',borderRadius: "50%" }}/>}
         <div style={{
           display: "flex",
@@ -116,6 +118,8 @@ InfoComponent.propTypes = {
   text4: PropTypes.string,
   delay1: PropTypes.string,
   delay2: PropTypes.string,
+  icon1alt: PropTypes.string,
+    icon2alt: PropTypes.string,
 };
 
 export default InfoComponent;
