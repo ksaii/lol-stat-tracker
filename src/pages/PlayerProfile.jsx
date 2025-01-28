@@ -17,26 +17,25 @@ const PlayerProfile = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true); // New loading state
+  const [rankedStats, setRankedStats] = useState([]);
 
   //This function sends a POST req to the openai link with input Value as the payload
   const callApi = (playerData) => {
-    const prompt = `Evaluate this player's stats in League of Legends and give a short max 1 sentence response: 
-          ${playerData.entries[0]?.queueType ?? ""} 
-          ${playerData.entries[0]?.tier ?? "Unranked"} ${
-      playerData.entries[0]?.rank ?? ""
-    } 
-          with Wins: ${playerData.entries[0]?.wins ?? "0"} Losses: ${
-      playerData.entries[0]?.losses ?? "0"
-    }`;
-
+    const prompt = `Evaluate this player's stats in League of Legends and give a short max 1 sentence response:
+    ${playerData[1]?.tier ?? ""}
+    ${playerData[1]?.rank ?? "Unranked"} ${playerData[1]?.rank ?? ""}
+    with Wins: ${playerData.entries[0]?.wins ?? "0"} Losses: ${playerData.entries[1]?.losses ?? "0"}`;
     
+
       promptGPT(prompt).then((data) => {
       if(data.error){
+        setLoading(false);
         setError(data.error);
       }else{
+        setLoading(false);
         setOpenaiData(data.data);
         console.log("Open ai response:" + openaiData);
-        setLoading(false);
+        
       }
 
       })
@@ -49,15 +48,46 @@ const PlayerProfile = () => {
     setLoading(true); // Start loading
     console.log("Fetching data for summonerrrrr: ", summonerName);
     fetchSummonerData(summonerName).then((data) => {
+      
       if (data.error) {
+        setLoading(false);
         setError(data.error);
       } else {
-        setPlayerData(data.data); // Set the fetched data to state
-          callApi(data.data); // Pass the data directly to callApi
+        console.log(data.summonerData);
+        const formattedData = formatRankedData(data.playerRankData); // Format the ranked data   
+        formattedData.unshift(data.summonerData); // Add the summoner profile data to the beginning of the array
+        console.log("Formatted Data:", formattedData);
+        setPlayerData(formattedData); // Set the fetched data to state
+        callApi(formattedData); // Pass the data directly to callApi
         
       }
     });
   }, [summonerName]);
+
+  const formatRankedData = (rankedData) => {
+
+    return rankedData
+    .map(entry => {
+        return {
+            queueType: queueTypeMap[entry.queueType] || entry.queueType, // Fallback to raw queueType if not in map
+            tier: entry.tier,
+            rank: entry.rank,
+            wins: entry.wins,
+            losses: entry.losses,
+            lp: entry.leaguePoints,
+            winRate: ((entry.wins / (entry.wins + entry.losses)) * 100).toFixed(2) + "%",
+        };
+    });
+  
+};
+
+
+  const queueTypeMap = {
+    "RANKED_SOLO_5x5": "Solo/Duo",
+    "RANKED_FLEX_SR": "Flex"
+};
+
+
 
   useEffect(() => {
     // Call the OpenAI API only when playerData is available
@@ -71,13 +101,13 @@ const PlayerProfile = () => {
     return <CircularProgress />; // Show loading spinner while data is being fetched
   }
 
-  if (error) {
+  /*if (error) {
     return <Typography color="error">{error}</Typography>; // Display error message if any
   }
 
   if (!playerData) {
     return <Typography>No player data available.</Typography>; // Fallback in case of empty data
-  }
+  }*/
 
   const handleGoHome = () => {
     navigate("/");
@@ -120,7 +150,7 @@ const PlayerProfile = () => {
             width="250px"
             height="400px"
             text1={summonerName}
-            text2={`Summoner Level: ${playerData.summonerProfile.summonerLevel}`}
+            text2={`Summoner Level: ${playerData[0].summonerLevel}`}
             text3={`${playerData.entries[0]?.queueType ?? ""} \n ${
               playerData.entries[0]?.tier ?? "Unranked"
             } ${playerData.entries[0]?.rank ?? ""}`}
@@ -141,14 +171,14 @@ const PlayerProfile = () => {
             height="400px"
             text1=""
             text2={`${openaiData ?? ""}`}
-            text3={`${playerData.entries[1]?.queueType ?? ""} \n ${
-              playerData.entries[1]?.tier ?? "Unranked"
-            } ${playerData.entries[1]?.rank ?? ""}`}
-            text4={`Wins: ${playerData.entries[1]?.wins ?? "0"} Losses: ${
-              playerData.entries[1]?.losses ?? "0"
+            text3={`${playerData[1]?.queueType ?? ""} \n ${
+              playerData[1]?.tier ?? "Unranked"
+            } ${playerData[1]?.rank ?? ""}`}
+            text4={`Wins: ${playerData[2]?.wins ?? "0"} Losses: ${
+              playerData[2]?.losses ?? "0"
             }`}
             image2={`/src/assets/RankedIcons/Rank=${
-              playerData.entries[1]?.tier ?? "Unranked"
+              playerData[2]?.tier ?? "Unranked"
             }.png`}
             animationDelay1="3s"
             animationDelay2="4s"

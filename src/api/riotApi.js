@@ -17,7 +17,7 @@ const fetchSummonerData = async (summonerName) => {
       //setError('');
       //setPlayerData(data); // Set the fetched data to state
       //callApi(); // Call the OpenAI API
-      return { data };
+      return { playerRankData: data.entries, summonerData: data.summonerProfile  };
     }
   } catch (err) {
     return { error: "Error fetching data from Riot API" };
