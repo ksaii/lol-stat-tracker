@@ -1,9 +1,11 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const fetchSummonerData = async (summonerName) => {
   console.log(`Sending and encoding ${summonerName} and then Fetching data...`);
 
   try {
     const response = await fetch(
-      `/api/riot/summoner/${encodeURIComponent(summonerName)}`
+      `${apiUrl}/api/riot/summoner/${encodeURIComponent(summonerName)}`
     ); // Correct endpoint
     if (!response.ok) throw new Error("Failed to fetch summoner data");
 

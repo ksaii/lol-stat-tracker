@@ -1,7 +1,9 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const promptGPT = async (prompt) => {
 
     try {
-        const res = await fetch("/api/openai/generate/report", {
+        const res = await fetch(`${apiUrl}/api/openai/generate/report`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({prompt}),
