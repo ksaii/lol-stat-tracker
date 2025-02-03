@@ -28,7 +28,8 @@ app.use((err, req, res, next) => {
 
   
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
+
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
