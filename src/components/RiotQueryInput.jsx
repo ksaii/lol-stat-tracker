@@ -4,6 +4,7 @@ import '../styles/RiotQueryInput.css';
 import Button from '@mui/material/Button';
 import HoverComponent from './HoverButtonComponent';
 import { CircularProgress } from '@mui/material';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 
 const AutoCompleteInput = () => {
@@ -44,7 +45,7 @@ const AutoCompleteInput = () => {
 
     try {
       
-        const response = await fetch(`/riot/summoner/${encodeURIComponent(summonerName)}`); // Correct endpoint
+        const response = await fetch(`${apiUrl}/riot/summoner/${encodeURIComponent(summonerName)}`); // Correct endpoint
         if (!response.ok) throw new Error('Failed to fetch summoner data');
 
         const data = await response.json();
