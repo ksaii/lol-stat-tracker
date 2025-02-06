@@ -21,7 +21,7 @@ const Typewriter = ({
     <div
       ref={typewriterRef}
       className="typewriter"
-      style={{ "--text": `"${text}"` }}
+      style={{ "--text": `"${text}"`, maxWidth: "100%" }}
     >
       <span aria-live="polite">{text}</span>
     </div>

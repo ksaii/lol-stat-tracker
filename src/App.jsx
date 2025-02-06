@@ -5,6 +5,7 @@ import Typewriter from './components/Typewriter';
 import './styles/App.css'
 
 import Home from './pages/Home'
+import NewHome from './pages/NewHome'
 import PlayerProfile from './pages/PlayerProfile'
 import NotFound from './pages/NotFound'
 
@@ -25,7 +26,7 @@ function App() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<NewHome />} />
             <Route path="/profile/:summonerName" element={<PlayerProfile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
