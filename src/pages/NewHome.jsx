@@ -8,8 +8,8 @@ const NewHome = () => {
     return (
         <div>
             <AutoCompleteInput />
-            <HoverButtonComponent height="5vh" width="5vw" text="" icon={GitHub} onClick={() => console.log("Search button clicked")}/>
-                
+           
+
             
         </div>
     )

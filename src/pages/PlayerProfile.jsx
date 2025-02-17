@@ -9,6 +9,7 @@ import fetchSummonerData from "../api/riotApi";
 import { Typography } from "@mui/material";
 import promptGPT from "../api/openaiApi";
 import '../styles/PlayerProfile.css';
+import { blue } from "@mui/material/colors";
 
 const PlayerProfile = () => {
   const [playerData, setPlayerData] = useState(null);
@@ -22,9 +23,11 @@ const PlayerProfile = () => {
   //This function sends a POST req to the openai link with input Value as the payload
   const callApi = (playerData) => {
     const prompt = `Evaluate this player's stats in League of Legends and give a short max 1 sentence response:
+    ${playerData[1]?.queueType ?? ""}
     ${playerData[1]?.tier ?? ""}
     ${playerData[1]?.rank ?? "Unranked"} ${playerData[1]?.rank ?? ""}
-    with Wins: ${playerData.entries[0]?.wins ?? "0"} Losses: ${playerData.entries[1]?.losses ?? "0"}`;
+    with Wins: ${playerData[1]?.wins ?? "0"} Losses: ${playerData[1]?.losses ?? "0"} LP: ${playerData[1]?.lp ?? "0"} and a winrate of ${playerData[1]?.winRate ?? "0"}%
+    ${playerData[2]?.queueType ?? ""} ${playerData[2]?.tier ?? ""} ${playerData[2]?.rank ?? "Unranked"} ${playerData[2]?.rank ?? ""} with Wins: ${playerData[2]?.wins ?? "0"} Losses: ${playerData[2]?.losses ?? "0"} LP: ${playerData[2]?.lp ?? "0"} and a winrate of ${playerData[2]?.winRate ?? "0"}%`;
     
 
       promptGPT(prompt).then((data) => {
@@ -98,7 +101,24 @@ const PlayerProfile = () => {
 
   // Conditional rendering for loading, error, or player data
   if (loading) {
-    return <CircularProgress />; // Show loading spinner while data is being fetched
+    return (
+      <div
+      style={{
+        height: "60vh",
+        marginTop: "20vh",
+        paddingTop: "80px",
+        padding: "20px",
+        maxWidth: "100%",
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "auto",
+      }}>
+      <CircularProgress size="50px" />
+    </div>
+    ); // Show loading spinner while data is being fetched
   }
 
   /*if (error) {
@@ -116,7 +136,7 @@ const PlayerProfile = () => {
   return (
     <div
       style={{
-        height: "80vh",
+        height: "60vh",
         marginTop: "20vh",
         paddingTop: "80px",
         padding: "20px",
@@ -129,13 +149,7 @@ const PlayerProfile = () => {
         margin: "auto",
       }}
     >
-      <HoverComponent
-        width="80px"
-        height="40px"
-        text="Home"
-        onClick={handleGoHome}
-        icon={Home}
-      ></HoverComponent>
+     
 
       {error && <p style={{ color: "red" }}> {error}</p>}
       {playerData ? (
@@ -144,6 +158,9 @@ const PlayerProfile = () => {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
+            backgroundColor: "rgba(88, 85, 85, 0.5)",
+            borderRadius: "10px",
+
           }}
         >
           <InfoComponent
@@ -151,17 +168,17 @@ const PlayerProfile = () => {
             height="400px"
             text1={summonerName}
             text2={`Summoner Level: ${playerData[0].summonerLevel}`}
-            text3={`${playerData.entries[0]?.queueType ?? ""} \n ${
-              playerData.entries[0]?.tier ?? "Unranked"
-            } ${playerData.entries[0]?.rank ?? ""}`}
-            text4={`Wins: ${playerData.entries[0]?.wins ?? "0"} Losses: ${
-              playerData.entries[0]?.losses ?? "0"
+            text3={`${playerData[1]?.queueType ?? ""}  \n ${
+              playerData[1]?.tier ?? `Unranked`
+            } ${playerData[1]?.rank ?? ""}`}
+            text4={`Wins: ${playerData[1]?.wins ?? "0"} Losses: ${
+              playerData[1]?.losses ?? "0"
             }`}
             image1={`http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/${
-              playerData.summonerProfile?.profileIconId ?? "1"
+              playerData[0]?.profileIconId ?? "1"
             }.png`}
             image2={`/src/assets/RankedIcons/Rank=${
-              playerData.entries[0]?.tier ?? "Unranked"
+              playerData[1]?.tier ?? "Unranked"
             }.png`}
             icon1alt="Profile Icon"
           ></InfoComponent>
@@ -171,9 +188,9 @@ const PlayerProfile = () => {
             height="400px"
             text1=""
             text2={`${openaiData ?? ""}`}
-            text3={`${playerData[1]?.queueType ?? ""} \n ${
-              playerData[1]?.tier ?? "Unranked"
-            } ${playerData[1]?.rank ?? ""}`}
+            text3={`${playerData[2]?.queueType ?? ""} \n ${
+              playerData[2]?.tier ?? `Unranked`
+            } ${playerData[2]?.rank ?? ""}`}
             text4={`Wins: ${playerData[2]?.wins ?? "0"} Losses: ${
               playerData[2]?.losses ?? "0"
             }`}

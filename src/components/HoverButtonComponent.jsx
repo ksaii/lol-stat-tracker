@@ -14,11 +14,11 @@ const HoverButtonComponent = ({
 
     const styles = {
         container: {
-            backgroundColor: isHovered ? 'grey' : '#242424',
+            backgroundColor: isHovered ? 'orange' : '#242424',
             cursor: 'pointer',
             transition: 'background-color 0.3s ease',
             padding: '10px' ,
-            border: '5px solid white' ,
+            border: '0px solid white' ,
             borderRadius: '1000px',
             color: 'white',
             display: 'flex',

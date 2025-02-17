@@ -114,7 +114,7 @@ const AutoCompleteInput = () => {
           type="text"
           value={inputValue}
           onChange={handleInputChange}
-          placeholder="Search summoner name..."
+          placeholder="Game Name + #NA1..."
           className='searchInput'
         />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
